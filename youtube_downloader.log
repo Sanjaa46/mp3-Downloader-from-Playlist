@@ -1,0 +1,95 @@
+2025-11-16 16:13:20,716 - INFO - YouTube Audio Downloader started
+2025-11-16 16:13:20,716 - INFO - Processing playlist: https://www.youtube.com/watch?v=Tbob4evGjoE&list=PLzTbcmokdZwc8hA_tcTPS4QVER67cQF3y&pp=gAQB
+2025-11-16 16:13:20,716 - INFO - Extracting URLs from playlist: https://www.youtube.com/watch?v=Tbob4evGjoE&list=PLzTbcmokdZwc8hA_tcTPS4QVER67cQF3y&pp=gAQB
+2025-11-16 16:13:20,860 - INFO - Attempting to extract playlist information...
+2025-11-16 16:13:23,192 - INFO - Playlist info extracted. Type: url
+2025-11-16 16:13:23,193 - INFO - Playlist title: test
+2025-11-16 16:13:23,193 - ERROR - Unexpected info type: url
+2025-11-16 16:13:23,193 - ERROR - Available keys: ['ie_key', 'id', 'title', '_type', 'url', 'webpage_url', 'original_url', 'webpage_url_basename', 'webpage_url_domain', 'extractor', 'extractor_key']
+2025-11-16 16:13:23,193 - INFO - Found 0 videos in playlist
+2025-11-16 16:13:23,193 - ERROR - No URLs found to process
+2025-11-16 16:23:33,630 - INFO - YouTube Audio Downloader started
+2025-11-16 16:23:33,630 - INFO - Processing playlist: https://www.youtube.com/watch?v=Tbob4evGjoE&list=PLzTbcmokdZwc8hA_tcTPS4QVER67cQF3y&pp=gAQB
+2025-11-16 16:23:33,630 - INFO - Extracting URLs from playlist: https://www.youtube.com/watch?v=Tbob4evGjoE&list=PLzTbcmokdZwc8hA_tcTPS4QVER67cQF3y&pp=gAQB
+2025-11-16 16:23:33,773 - INFO - Attempting to extract playlist information...
+2025-11-16 16:23:36,002 - INFO - Playlist info extracted. Type: url
+2025-11-16 16:23:36,003 - INFO - Playlist title: test
+2025-11-16 16:23:36,003 - ERROR - Unexpected info type: url
+2025-11-16 16:23:36,003 - ERROR - Available keys: ['ie_key', 'id', 'title', '_type', 'url', 'webpage_url', 'original_url', 'webpage_url_basename', 'webpage_url_domain', 'extractor', 'extractor_key']
+2025-11-16 16:23:36,003 - INFO - Found 0 videos in playlist
+2025-11-16 16:23:36,003 - INFO - Trying alternative playlist extraction methods...
+2025-11-16 16:23:36,003 - INFO - Trying clean playlist URL: https://www.youtube.com/playlist?list=PLzTbcmokdZwc8hA_tcTPS4QVER67cQF3y
+2025-11-16 16:23:36,003 - INFO - Extracting URLs from playlist: https://www.youtube.com/playlist?list=PLzTbcmokdZwc8hA_tcTPS4QVER67cQF3y
+2025-11-16 16:23:36,095 - INFO - Attempting to extract playlist information...
+2025-11-16 16:23:37,510 - INFO - Playlist info extracted. Type: playlist
+2025-11-16 16:23:37,511 - INFO - Playlist title: test
+2025-11-16 16:23:37,511 - INFO - Processing playlist with 15 entries
+2025-11-16 16:23:37,511 - INFO -   [1] GANGBAY - "HARANGA" (OFFICIAL MUSIC VIDEO)
+2025-11-16 16:23:37,511 - INFO -   [2] NAAGII - Itgel
+2025-11-16 16:23:37,512 - INFO -   [3] The Colors - The Light Within
+2025-11-16 16:23:37,512 - INFO -   [4] SIENTE - STARRY NIGHT (Feat. TUGU) [MV]
+2025-11-16 16:23:37,512 - INFO -   [5] Noubold - Tusuulul Buhen Chi ft. Bektor Petrovic, Toshiari
+2025-11-16 16:23:37,512 - INFO -   [6] Chotaro ft Erdene - Davlagaa (Official Music Video)
+2025-11-16 16:23:37,512 - INFO -   [7] Roockie - IB NI MACHD RAIHTAI (feat. Man On The Moon) Official Music Video
+2025-11-16 16:23:37,512 - INFO -   [8] Knock2 - dashstar* (Official Music Video)
+2025-11-16 16:23:37,513 - INFO -   [9] Trishna - 1937 (Official Music Video)
+2025-11-16 16:23:37,513 - INFO -   [10] 113 X GINJIN - ZUUNII ZUGAA
+2025-11-16 16:23:37,513 - INFO -   [11] mxrningstar - бодлын гүнээс
+2025-11-16 16:23:37,513 - INFO -   [12] davaidasha - Nar Shig Jarga (Official Audio)
+2025-11-16 16:23:37,513 - INFO -   [13] Gangaa & Minayu - Red Hoodie /Unofficial Audio/
+2025-11-16 16:23:37,513 - INFO -   [14] Ginjin & Mrs M - Pokemon ( Official Music Video )
+2025-11-16 16:23:37,514 - INFO -   [15] Swedish House Mafia ft. John Martin - Don't You Worry Child (Official Video)
+2025-11-16 16:23:37,514 - INFO - Found 15 videos in playlist
+2025-11-16 16:23:37,514 - INFO - Total URLs to process: 15
+2025-11-16 16:23:37,618 - INFO - Processing (1/15): https://www.youtube.com/watch?v=m5-A9QYUheI
+2025-11-16 16:23:40,489 - INFO - Title: GANGBAY - "HARANGA" (OFFICIAL MUSIC VIDEO)
+2025-11-16 16:23:47,526 - INFO - ✓ Successfully downloaded: GANGBAY - "HARANGA" (OFFICIAL MUSIC VIDEO)
+2025-11-16 16:23:47,526 - INFO - Processing (2/15): https://www.youtube.com/watch?v=9_Joe3uX5F4
+2025-11-16 16:23:49,758 - INFO - Title: NAAGII - Itgel
+2025-11-16 16:23:58,617 - INFO - ✓ Successfully downloaded: NAAGII - Itgel
+2025-11-16 16:23:58,617 - INFO - Processing (3/15): https://www.youtube.com/watch?v=Z2S4QfkfM48
+2025-11-16 16:24:01,153 - INFO - Title: The Colors - The Light Within
+2025-11-16 16:24:08,943 - INFO - ✓ Successfully downloaded: The Colors - The Light Within
+2025-11-16 16:24:08,943 - INFO - Processing (4/15): https://www.youtube.com/watch?v=lgLZepHeUcQ
+2025-11-16 16:24:11,485 - INFO - Title: SIENTE - STARRY NIGHT (Feat. TUGU) [MV]
+2025-11-16 16:24:19,301 - INFO - ✓ Successfully downloaded: SIENTE - STARRY NIGHT (Feat. TUGU) [MV]
+2025-11-16 16:24:19,302 - INFO - Processing (5/15): https://www.youtube.com/watch?v=2NK32HX0N3E
+2025-11-16 16:24:21,724 - INFO - Title: Noubold - Tusuulul Buhen Chi ft. Bektor Petrovic, Toshiari
+2025-11-16 16:24:28,568 - INFO - ✓ Successfully downloaded: Noubold - Tusuulul Buhen Chi ft. Bektor Petrovic, Toshiari
+2025-11-16 16:24:28,568 - INFO - Processing (6/15): https://www.youtube.com/watch?v=4qRkKAhJq8o
+2025-11-16 16:24:31,069 - INFO - Title: Chotaro ft Erdene - Davlagaa (Official Music Video)
+2025-11-16 16:24:39,183 - INFO - ✓ Successfully downloaded: Chotaro ft Erdene - Davlagaa (Official Music Video)
+2025-11-16 16:24:39,183 - INFO - Processing (7/15): https://www.youtube.com/watch?v=vGthh-aAyaM
+2025-11-16 16:24:41,783 - INFO - Title: Roockie - IB NI MACHD RAIHTAI (feat. Man On The Moon) Official Music Video
+2025-11-16 16:24:49,896 - INFO - ✓ Successfully downloaded: Roockie - IB NI MACHD RAIHTAI (feat. Man On The Moon) Official Music Video
+2025-11-16 16:24:49,896 - INFO - Processing (8/15): https://www.youtube.com/watch?v=58ml5b_On6w
+2025-11-16 16:24:52,254 - INFO - Title: Knock2 - dashstar* (Official Music Video)
+2025-11-16 16:25:00,637 - INFO - ✓ Successfully downloaded: Knock2 - dashstar* (Official Music Video)
+2025-11-16 16:25:00,637 - INFO - Processing (9/15): https://www.youtube.com/watch?v=95PRssKGaoY
+2025-11-16 16:25:03,144 - INFO - Title: Trishna - 1937 (Official Music Video)
+2025-11-16 16:25:11,077 - INFO - ✓ Successfully downloaded: Trishna - 1937 (Official Music Video)
+2025-11-16 16:25:11,077 - INFO - Processing (10/15): https://www.youtube.com/watch?v=pOjyToZ3R9w
+2025-11-16 16:25:13,354 - INFO - Title: 113 X GINJIN - ZUUNII ZUGAA
+2025-11-16 16:25:21,038 - INFO - ✓ Successfully downloaded: 113 X GINJIN - ZUUNII ZUGAA
+2025-11-16 16:25:21,038 - INFO - Processing (11/15): https://www.youtube.com/watch?v=47fmL28Q1KY
+2025-11-16 16:25:23,388 - INFO - Title: mxrningstar - бодлын гүнээс
+2025-11-16 16:25:31,198 - INFO - ✓ Successfully downloaded: mxrningstar - бодлын гүнээс
+2025-11-16 16:25:31,198 - INFO - Processing (12/15): https://www.youtube.com/watch?v=-tA1n_jRyuM
+2025-11-16 16:25:33,590 - INFO - Title: davaidasha - Nar Shig Jarga (Official Audio)
+2025-11-16 16:25:41,509 - INFO - ✓ Successfully downloaded: davaidasha - Nar Shig Jarga (Official Audio)
+2025-11-16 16:25:41,509 - INFO - Processing (13/15): https://www.youtube.com/watch?v=TDaeA0G6qTw
+2025-11-16 16:25:43,695 - INFO - Title: Gangaa & Minayu - Red Hoodie /Unofficial Audio/
+2025-11-16 16:25:51,507 - INFO - ✓ Successfully downloaded: Gangaa & Minayu - Red Hoodie /Unofficial Audio/
+2025-11-16 16:25:51,507 - INFO - Processing (14/15): https://www.youtube.com/watch?v=Y9E4H1nlONY
+2025-11-16 16:25:53,951 - INFO - Title: Ginjin & Mrs M - Pokemon ( Official Music Video )
+2025-11-16 16:26:01,971 - INFO - ✓ Successfully downloaded: Ginjin & Mrs M - Pokemon ( Official Music Video )
+2025-11-16 16:26:01,972 - INFO - Processing (15/15): https://www.youtube.com/watch?v=1y6smkh6c-0
+2025-11-16 16:26:04,429 - INFO - Title: Swedish House Mafia ft. John Martin - Don't You Worry Child (Official Video)
+2025-11-16 16:26:12,680 - INFO - ✓ Successfully downloaded: Swedish House Mafia ft. John Martin - Don't You Worry Child (Official Video)
+2025-11-16 16:26:12,680 - INFO - 
+=== Download Summary ===
+2025-11-16 16:26:12,680 - INFO - Successful downloads: 15
+2025-11-16 16:26:12,680 - INFO - Failed downloads: 0
+2025-11-16 16:26:12,681 - INFO - Total processed: 15
+2025-11-16 16:26:12,681 - INFO - Output directory: /home/sanjaa/snj-share/pythonScripts/mp3DownloaderFromPlaylist/my_music
+2025-11-16 16:26:12,681 - INFO - YouTube Audio Downloader completed
