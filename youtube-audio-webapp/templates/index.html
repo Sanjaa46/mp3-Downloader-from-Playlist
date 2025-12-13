@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Audio Downloader</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+            font-weight: 600;
+        }
+
+        .tab:hover {
+            color: #667eea;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+            font-family: monospace;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+        }
+
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .progress-section {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .progress-section.visible {
+            display: block;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #f0f0f0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .current-video {
+            background: #e8f0fe;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .current-video-label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .current-video-title {
+            font-weight: 600;
+            color: #333;
+            word-break: break-word;
+        }
+
+        .logs {
+            max-height: 300px;
+            overflow-y: auto;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .log-entry {
+            padding: 8px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        .log-entry.info {
+            background: white;
+        }
+
+        .log-entry.success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .log-entry.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .log-timestamp {
+            color: #666;
+            font-family: monospace;
+            font-size: 0.85rem;
+        }
+
+        .downloads-section {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .downloads-section.visible {
+            display: block;
+        }
+
+        .download-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
+        .download-name {
+            flex: 1;
+            font-weight: 500;
+            word-break: break-word;
+            margin-right: 15px;
+        }
+
+        .download-btn {
+            padding: 8px 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+
+        .download-btn:hover {
+            background: #5568d3;
+        }
+
+        .clear-btn {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .clear-btn:hover {
+            background: #c82333;
+        }
+
+        .alert {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .alert.visible {
+            display: block;
+        }
+
+        .alert.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎵 YouTube Audio Downloader</h1>
+            <p>Download MP3 audio from YouTube videos and playlists</p>
+        </div>
+
+        <div class="card">
+            <div id="alertBox" class="alert"></div>
+
+            <div class="tabs">
+                <button class="tab active" data-tab="single">Single Video</button>
+                <button class="tab" data-tab="playlist">Playlist</button>
+                <button class="tab" data-tab="multiple">Multiple URLs</button>
+            </div>
+
+            <div id="single" class="tab-content active">
+                <div class="form-group">
+                    <label for="singleUrl">YouTube Video URL</label>
+                    <input type="text" id="singleUrl" placeholder="https://www.youtube.com/watch?v=...">
+                </div>
+                <button class="btn" onclick="startDownload('single')">Download Audio</button>
+            </div>
+
+            <div id="playlist" class="tab-content">
+                <div class="form-group">
+                    <label for="playlistUrl">YouTube Playlist URL</label>
+                    <input type="text" id="playlistUrl" placeholder="https://www.youtube.com/playlist?list=...">
+                </div>
+                <button class="btn" onclick="startDownload('playlist')">Download Playlist</button>
+            </div>
+
+            <div id="multiple" class="tab-content">
+                <div class="form-group">
+                    <label for="multipleUrls">YouTube URLs (one per line)</label>
+                    <textarea id="multipleUrls" placeholder="https://www.youtube.com/watch?v=...
+https://www.youtube.com/watch?v=...
+https://www.youtube.com/watch?v=..."></textarea>
+                </div>
+                <button class="btn" onclick="startDownload('multiple')">Download All</button>
+            </div>
+        </div>
+
+        <div class="card progress-section" id="progressSection">
+            <h2 style="margin-bottom: 20px;">Download Progress</h2>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalVideos">0</div>
+                    <div class="stat-label">Total</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="completedVideos">0</div>
+                    <div class="stat-label">Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="failedVideos">0</div>
+                    <div class="stat-label">Failed</div>
+                </div>
+            </div>
+
+            <div class="current-video" id="currentVideoBox" style="display: none;">
+                <div class="current-video-label">Currently downloading:</div>
+                <div class="current-video-title" id="currentVideo"></div>
+            </div>
+
+            <div class="progress-header">
+                <span style="font-weight: 600;">Progress</span>
+                <span id="progressText">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%;">0%</div>
+            </div>
+
+            <h3 style="margin-bottom: 15px;">Activity Log</h3>
+            <div class="logs" id="logs"></div>
+        </div>
+
+        <div class="card downloads-section" id="downloadsSection">
+            <h2 style="margin-bottom: 20px;">Downloaded Files</h2>
+            <div id="downloadsList"></div>
+            <button class="clear-btn" onclick="clearDownloads()">Clear All Downloads</button>
+        </div>
+    </div>
+
+    <script>
+        let statusInterval = null;
+
+        // Tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                tab.classList.add('active');
+                const contentId = tab.getAttribute('data-tab');
+                document.getElementById(contentId).classList.add('active');
+            });
+        });
+
+        function showAlert(message, type) {
+            const alertBox = document.getElementById('alertBox');
+            alertBox.textContent = message;
+            alertBox.className = `alert ${type} visible`;
+            setTimeout(() => {
+                alertBox.classList.remove('visible');
+            }, 5000);
+        }
+
+        async function startDownload(type) {
+            let url = '';
+            let urls = '';
+
+            if (type === 'single') {
+                url = document.getElementById('singleUrl').value.trim();
+            } else if (type === 'playlist') {
+                url = document.getElementById('playlistUrl').value.trim();
+            } else if (type === 'multiple') {
+                urls = document.getElementById('multipleUrls').value.trim();
+            }
+
+            const data = { type };
+            if (type === 'multiple') {
+                data.urls = urls;
+            } else {
+                data.url = url;
+            }
+
+            try {
+                const response = await fetch('/api/download', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    showAlert(result.message, 'success');
+                    document.getElementById('progressSection').classList.add('visible');
+                    startStatusPolling();
+                } else {
+                    showAlert(result.error || 'Failed to start download', 'error');
+                }
+            } catch (error) {
+                showAlert('Error: ' + error.message, 'error');
+            }
+        }
+
+        function startStatusPolling() {
+            if (statusInterval) clearInterval(statusInterval);
+            
+            statusInterval = setInterval(async () => {
+                try {
+                    const response = await fetch('/api/status');
+                    const status = await response.json();
+
+                    updateUI(status);
+
+                    if (!status.is_downloading && statusInterval) {
+                        setTimeout(() => {
+                            if (statusInterval) {
+                                clearInterval(statusInterval);
+                                statusInterval = null;
+                            }
+                        }, 3000);
+                    }
+                } catch (error) {
+                    console.error('Error fetching status:', error);
+                }
+            }, 500);
+        }
+
+        function updateUI(status) {
+            document.getElementById('totalVideos').textContent = status.total_videos;
+            document.getElementById('completedVideos').textContent = status.completed;
+            document.getElementById('failedVideos').textContent = status.failed;
+
+            const progress = Math.round(status.progress);
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressFill').textContent = progress + '%';
+            document.getElementById('progressText').textContent = progress + '%';
+
+            const currentVideoBox = document.getElementById('currentVideoBox');
+            if (status.current_video) {
+                currentVideoBox.style.display = 'block';
+                document.getElementById('currentVideo').textContent = status.current_video;
+            } else {
+                currentVideoBox.style.display = 'none';
+            }
+
+            const logsDiv = document.getElementById('logs');
+            logsDiv.innerHTML = '';
+            status.logs.slice().reverse().forEach(log => {
+                const logEntry = document.createElement('div');
+                logEntry.className = `log-entry ${log.level}`;
+                logEntry.innerHTML = `
+                    <span class="log-timestamp">${log.timestamp}</span>
+                    <span>${log.message}</span>
+                `;
+                logsDiv.appendChild(logEntry);
+            });
+
+            if (status.download_urls.length > 0) {
+                document.getElementById('downloadsSection').classList.add('visible');
+                const downloadsList = document.getElementById('downloadsList');
+                downloadsList.innerHTML = '';
+                status.download_urls.forEach(file => {
+                    const item = document.createElement('div');
+                    item.className = 'download-item';
+                    item.innerHTML = `
+                        <span class="download-name">${file}</span>
+                        <button class="download-btn" onclick="downloadFile('${file}')">Download</button>
+                    `;
+                    downloadsList.appendChild(item);
+                });
+            }
+        }
+
+        function downloadFile(filename) {
+            window.location.href = `/api/download/${encodeURIComponent(filename)}`;
+        }
+
+        async function clearDownloads() {
+            if (!confirm('Are you sure you want to clear all downloaded files?')) return;
+
+            try {
+                const response = await fetch('/api/clear');
+                const result = await response.json();
+
+                if (response.ok) {
+                    document.getElementById('downloadsSection').classList.remove('visible');
+                    showAlert('All downloads cleared', 'success');
+                } else {
+                    showAlert(result.error || 'Failed to clear downloads', 'error');
+                }
+            } catch (error) {
+                showAlert('Error: ' + error.message, 'error');
+            }
+        }
+
+        // Check for existing downloads on page load
+        fetch('/api/status')
+            .then(r => r.json())
+            .then(status => {
+                if (status.download_urls.length > 0) {
+                    updateUI(status);
+                }
+            });
+    </script>
+</body>
+</html>
