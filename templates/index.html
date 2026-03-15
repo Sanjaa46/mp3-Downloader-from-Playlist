@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker FFmpeg Downloader</title>
+    <!-- Basic styling -->
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; background: #fdfdfd; }
+        .card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        input[type="text"] { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { padding: 10px 20px; background: #0066cc; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:disabled { background: #999; cursor: wait; }
+        #message { margin-top: 15px; padding: 10px; display: none; border-radius: 4px; line-height: 1.4; }
+        .error { background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
+        .info { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+        .success { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>YouTube Audio Downloader</h2>
+        <p>Enter a YouTube URL below. It will be downloaded and converted to MP3 entirely inside the Docker container using FFmpeg, then sent to your browser.</p>
+        <form id="downloadForm">
+            <input type="text" id="urlInput" placeholder="https://www.youtube.com/watch?v=..." required />
+            <button type="submit" id="submitBtn">Convert & Download</button>
+        </form>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('downloadForm');
+        const input = document.getElementById('urlInput');
+        const btn = document.getElementById('submitBtn');
+        const msg = document.getElementById('message');
+
+        function showMessage(text, type) {
+            msg.innerHTML = text; // allow basic html
+            msg.className = type;
+            msg.style.display = 'block';
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const url = input.value.trim();
+            if (!url) return;
+
+            btn.disabled = true;
+            btn.textContent = 'Processing in Docker container...';
+            showMessage('Downloading and converting via FFmpeg...<br>This may take a minute.', 'info');
+
+            try {
+                const response = await fetch('/download', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ youtube_url: url })
+                });
+
+                if (response.ok) {
+                    // Extract filename from the Content-Disposition header
+                    let filename = 'audio.mp3';
+                    const cd = response.headers.get('Content-Disposition');
+                    if (cd && cd.includes('filename=')) {
+                        filename = cd.split('filename=')[1].replace(/["']/g, '').trim();
+                    }
+
+                    // Create blob and trigger native browser download
+                    const blob = await response.blob();
+                    const dlUrl = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = dlUrl;
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    window.URL.revokeObjectURL(dlUrl);
+
+                    showMessage('<b>✅ Download Complete!</b><br>The MP3 was successfully delivered and deleted from the server container.', 'success');
+                    input.value = '';
+                } else {
+                    const errorData = await response.json();
+                    showMessage('<b>Error:</b> ' + (errorData.error || 'Server error'), 'error');
+                }
+            } catch (err) {
+                showMessage('<b>Error:</b> Network error or server unreachable', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Convert & Download';
+            }
+        });
+    </script>
+</body>
+</html>
